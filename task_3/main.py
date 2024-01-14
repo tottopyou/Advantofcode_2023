@@ -17,13 +17,16 @@ print(per)
 number = []
 bool_res = []
 result = []
+numbers = []
+
+
 
 for i, line in enumerate(per):
     for j, symbol in enumerate(line):
         if symbol.isdigit():
             number.append(symbol)
             neighbours = get_neighbours(per,[i,j])
-            if any(char.isalpha() or (char != '.' and not char.isdigit()) for char in neighbours):
+            if '*' in neighbours:
                 bool_res.append(True)
             else:
                 bool_res.append(False)
@@ -37,4 +40,4 @@ for i, line in enumerate(per):
                 number = []
                 bool_res = []
 
-print(sum(result))
+print(result)
