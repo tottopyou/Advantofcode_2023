@@ -34,5 +34,5 @@ for i, card in enumerate(card_string):
 
     copy_list = []
     win_card = []
-print(game.values())
+print(game)
 print(sum(game.values()))
