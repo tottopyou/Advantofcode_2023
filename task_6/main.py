@@ -1,23 +1,23 @@
 from data import *
 import re
-import numpy
 
 number = []
 res = []
 
-time_numbers = re.findall(r'\b\d+\b', re.search(r'Time:(.*?)Distance:', info, re.DOTALL).group())
-distance_numbers = re.findall(r'\b\d+\b', re.search(r'Distance:(.*?)$', info, re.DOTALL).group())
+time_info = re.search(r'Time:\s*(\d+)\s*(\d+)\s*(\d+)\s*(\d+)', info)
+distance_info = re.search(r'Distance:\s*(\d+)\s*(\d+)\s*(\d+)\s*(\d+)', info)
 
-for time, distance in zip(time_numbers, distance_numbers):
-    time, distance = int(time), int(distance)
-    for i in range(time):
-        if i * (time - i) < distance:
-            i += 1
-        elif i * (time - i) > distance:
-            number.append(i)
-            i += 1
+time_numbers = ''.join(time_info.groups())
+distance_numbers = ''.join(distance_info.groups())
 
-    res.append(len(number))
-    number = []
+time, distance = int(time_numbers), int(distance_numbers)
+for i in range(time):
+    if i * (time - i) < distance:
+        i += 1
+    elif i * (time - i) > distance:
+        number.append(i)
+        i += 1
 
-print(numpy.prod(res))
+print(len(number))
+
+
